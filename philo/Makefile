@@ -1,4 +1,4 @@
-NAME		=	philo_bonus
+NAME		=	philo
 
 CC			=	gcc #-g -fsanitize=thread
 
@@ -6,7 +6,7 @@ FLAGS		=	-Wall -Wextra -Werror
 HEADER		=	philo.h
 
 SRCS		=	philo.c philo_utils.c philo_create.c \
-				philo_time.c values.c waiter_check.c
+				philo_time.c values_philo.c waiter_check.c
 
 OBJS		=	${SRCS:%.c=%.o}
 

@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:30:18 by kannie            #+#    #+#             */
-/*   Updated: 2022/06/22 16:16:19 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:34:31 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ int	main(int argc, char **argv)
 		info = values_waiter(argv, &waiter);
 		if (info < 0)
 			return (print_exit(info));
-		info = philo_create(&waiter);
-		if (info < 0)
-			return (print_exit(info));
+		philo_create(&waiter);
 		free (waiter.philo);
+		sem_unlink("sem_forks");
+		sem_unlink("sem_print");
+		sem_close(waiter.forks);
+		sem_close(waiter.print);
 		return (print_exit(info));
 	}
 	else
