@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:35:29 by kannie            #+#    #+#             */
-/*   Updated: 2022/06/23 18:14:42 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/24 16:35:45 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ typedef struct s_philo
 	long long		start;
 	int				must_eat;
 	long long		last_eat;
-	int				time_to_life;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				s_die;
-	int				sig_eat;
+	long long		time_to_life;
+	long long		time_to_eat;
+	long long		time_to_sleep;
 	int				nbr_eat;
-	int				f_kill;
+	int				sigone_p;
 	sem_t			*forks;
 	sem_t			*print;
-	sem_t			*eat;
+	sem_t			*kill;
 	pthread_t		check_life;
 }	t_philo;
 
@@ -47,16 +45,15 @@ typedef struct s_waiter
 {
 	sem_t			*forks;
 	sem_t			*print;
-	sem_t			*eat;
+	sem_t			*kill;
 	t_philo			*philo;
-	pthread_t		check_ate;
 	long long		start;
 	int				must_eat;
 	int				nbr_philo;
-	int				time_to_life;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				sig_ate;
+	long long		time_to_life;
+	long long		time_to_eat;
+	long long		time_to_sleep;
+	int				sigone_p;
 }	t_waiter;
 
 int			ft_atoi(const char *str);
@@ -70,10 +67,11 @@ int			num_portion(char *str, t_waiter *waiter);
 void		philo_create(t_waiter *waiter);
 void		philo_life(t_philo *buf);
 void		what_philo_do(t_philo *philo, char *str,
-				int time_to_do);
+				long long time_to_do);
 void		ft_sleep_philo(long long time_do);
 long long	time_to(void);
 void		*philo_check(void *buf);
-void		*check_ate(void *buf);
+void		check_ate(t_waiter *waiter);
+void		take_forks(t_philo *philo);
 
 #endif
