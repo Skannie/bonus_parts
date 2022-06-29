@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 16:59:01 by kannie            #+#    #+#             */
-/*   Updated: 2022/06/22 16:13:49 by kannie           ###   ########.fr       */
+/*   Created: 2021/10/26 18:19:43 by kannie            #+#    #+#             */
+/*   Updated: 2022/03/27 00:03:10 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-int	check_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
+#include "push_swap.h"
 
 int	schar_v_int(const char *strok, int i, int minus)
 {
-	unsigned int	l;
+	long	l;
 
 	l = 0;
-	while (strok[i] >= 48 && strok[i] <= 57)
+	while (strok[i])
 	{
-		l = l * 10 + (strok[i] - 48);
+		if (strok[i] >= '0' && strok[i] <= '9')
+			l = l * 10 + (strok[i] - 48);
+		else
+			write_error();
+		if (l > INT_MAX && l < INT_MIN)
+			write_error();
 		i++;
-		if (l > 2147483647 && minus == 1)
-			return (-1);
-		if (l > 2147483648 && minus == -1)
-			return (0);
 	}
 	return (l * minus);
 }
@@ -48,11 +34,11 @@ int	ft_atoi(const char *str)
 {
 	int				a;
 	int				minus;
+	long	b;
 
 	a = 0;
+	b = 0;
 	minus = 1;
-	if (check_str((char *)str) > 0)
-		return (-1);
 	while (str[a] == ' ' || str[a] == '\n' || str[a] == '\t'
 		|| str[a] == '\v' || str[a] == '\r' || str[a] == '\f')
 		a++;
@@ -64,8 +50,29 @@ int	ft_atoi(const char *str)
 			minus = 1;
 		a++;
 	}
-	if (str[a] >= '0' && str[a] <= '9')
-		return (schar_v_int(str, a, minus));
+	if (str[a] >= 48 && str[a] <= 57)
+	{
+		b = schar_v_int(str, a, minus);
+	}
 	else
-		return (-1);
+		write_error();
+		return (b);
+}
+
+t_stack	*go_last(t_stack *stk)
+{
+	if (stk == NULL)
+		return (NULL);
+	while (stk->next)
+		stk = stk->next;
+	return (stk);
+}
+
+t_stack	*go_prelast(t_stack *stk)
+{
+	if (stk == NULL)
+		return (NULL);
+	while (stk->next->next)
+		stk = stk->next;
+	return (stk);
 }
