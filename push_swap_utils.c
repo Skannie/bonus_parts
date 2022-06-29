@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 18:19:43 by kannie            #+#    #+#             */
-/*   Updated: 2022/03/27 00:03:10 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/29 15:00:22 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_atoi(const char *str)
 {
 	int				a;
 	int				minus;
-	long	b;
+	long			b;
 
 	a = 0;
 	b = 0;
@@ -56,7 +56,7 @@ int	ft_atoi(const char *str)
 	}
 	else
 		write_error();
-		return (b);
+	return (b);
 }
 
 t_stack	*go_last(t_stack *stk)
@@ -75,4 +75,16 @@ t_stack	*go_prelast(t_stack *stk)
 	while (stk->next->next)
 		stk = stk->next;
 	return (stk);
+}
+
+void	delete_stack(t_stack *stk)
+{
+	t_stack	*next;
+
+	while (stk)
+	{
+		next = stk->next;
+		free(stk);
+		stk = next;
+	}
 }

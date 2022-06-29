@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 18:53:48 by kannie            #+#    #+#             */
-/*   Updated: 2022/06/29 10:01:52 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/29 14:59:56 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,4 @@ char	*get_next_line(int fd)
 		free (buf);
 		return (NULL);
 	}
-}
-
-int	main(void)
-{
-	int		fd;
-
-	fd = open("text.txt", O_RDONLY);
-	printf("1%s", get_next_line(fd));
-	printf("2%s", get_next_line(fd));
-	printf("3%s", get_next_line(fd));
-	printf("4%s", get_next_line(fd));
-	printf("5>%s", get_next_line(fd));
-	printf("6>%s", get_next_line(fd));
-	printf("7>%s", get_next_line(fd));
-	printf("8>%s", get_next_line(fd));
-	printf("9>%s", get_next_line(fd));
-	printf("10>%s", get_next_line(fd));
-	return (0);
 }

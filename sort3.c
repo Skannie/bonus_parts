@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:52:56 by kannie            #+#    #+#             */
-/*   Updated: 2022/03/25 22:57:24 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/29 15:00:34 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,21 @@ void	back_th(t_stack **a, t_stack **b, int down, int top)
 	while (down--)
 		*a = print_rev_rot_rr(*a, 'a');
 	print_p_push(b, a, 'a');
+}
+
+void	check_double(t_stack *stk)
+{
+	t_stack	*hstk;
+
+	while (stk)
+	{
+		hstk = stk->next;
+		while (hstk)
+		{
+			if (hstk->data == stk->data)
+				write_error();
+			hstk = hstk->next;
+		}
+		stk = stk->next;
+	}
 }
